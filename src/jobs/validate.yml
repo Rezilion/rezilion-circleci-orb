@@ -10,7 +10,9 @@ parameters:
 steps:
   - attach_workspace:
       at: /tmp/rezilion
-  - install_rezilion
+  - run:
+      name: Install Rezilion
+      command: << include(scripts/install_rezilion.sh) >>
   - run:
       name: Rezilion Validate
       environment:

@@ -3,7 +3,7 @@ description: Running Rezilion over multiple images in a pipeline
 usage:
   version: 2.1
   orbs:
-    rezilion: rezilion/rezilion@1.7.0
+    rezilion: rezilion/rezilion@x.y.z
 
   jobs:
     test_nginx:
