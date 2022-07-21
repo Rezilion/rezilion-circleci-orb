@@ -3,7 +3,7 @@ version: 2.1
 
 description: >
   With Rezilion orb, applications can be built securely by validating vulnerabilities early in the development process. developers can focus on exploitable vulnerabilities and reduce their backlog and patching by 85%.
-  With Rezilion, you'll gain a deep understanding of your environment, uncover and validate vulnerabilities in your applications and container images, and export the output in auditing formats.
+  With Rezilion, you'll gain a deep understanding of your environment, uncover and validate vulnerabilities in your applications, and export the output in auditing formats.
   To use this orb, you need a Rezilion license.
 
 display:
