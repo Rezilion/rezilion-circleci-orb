@@ -1,0 +1,8 @@
+---
+description: Installs rezilion over the container. should not be called directly, use rezilion_start instead.
+steps:
+  - attach_workspace:
+      at: /tmp/rezilion
+  - run:
+      name: Install Rezilion
+      command: << include(scripts/install_rezilion.sh) >>

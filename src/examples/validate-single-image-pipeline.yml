@@ -1,0 +1,25 @@
+---
+description: Running Rezilion over an image in a pipeline
+usage:
+  version: 2.1
+  orbs:
+    rezilion: rezilion/rezilion@1.7.0
+  jobs:
+    test_nginx:
+      docker:
+        - image: nginx:1.21.1
+      steps:
+        - rezilion/rezilion_start
+        - run:
+            name: test nginx
+            command: |
+              timeout 5 /docker-entrypoint.sh nginx || true
+        - rezilion/rezilion_stop
+  workflows:
+    my_workflow:
+      jobs:
+        - test_nginx
+        - rezilion/validate:
+            image_to_scan: nginx:1.21.1
+            requires:
+              - test_nginx

@@ -1,0 +1,50 @@
+---
+version: 2.1
+orbs:
+  orb-tools: circleci/orb-tools@11.1
+  rezilion: rezilion/rezilion@dev:<<pipeline.git.revision>>
+
+
+filters: &filters
+  tags:
+    only: /.*/
+
+jobs:
+  test_nginx:
+    docker:
+      - image: nginx:1.21.1
+    steps:
+      - rezilion/rezilion_start
+
+      - run:
+          name: test nginx
+          command: |
+            timeout 5 /docker-entrypoint.sh nginx || true
+
+      - rezilion/rezilion_stop
+
+workflows:
+  test-deploy:
+    jobs:
+      - test_nginx:
+          filters: *filters
+      - rezilion/validate:
+          filters: *filters
+          image_to_scan: nginx:1.21.1
+          requires:
+            - test_nginx
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/publish:
+          orb-name: rezilion/rezilion
+          vcs-type: << pipeline.project.type >>
+          pub-type: production
+          requires:
+            - orb-tools/pack
+            - rezilion/validate
+          context: orb-publisher
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v[0-9]+\.[0-9].*/
