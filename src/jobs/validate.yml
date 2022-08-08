@@ -1,7 +1,7 @@
 ---
 description: Validate pipeline image(s) and providing results on your environment and security risks based on your vulnerabilities
 docker:
-  - image: ubuntu:20.04
+  - image: centos:centos7
 parameters:
   image_to_scan:
     type: string

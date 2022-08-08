@@ -20,8 +20,8 @@ for dir in "$REZILION_OUTPUTS_FOLDER"/*/
     fi
 
     NORMALIZED_IMAGE_NAME=$(basename -- "$IMAGE_NAME_DECODED")
-    echo $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --scanner-output-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/scanner_result.json --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-type trivy || true
-    $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --scanner-output-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/scanner_result.json --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-type trivy || true
+    echo $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-name trivy || true
+    $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-name trivy || true
 
   done
 

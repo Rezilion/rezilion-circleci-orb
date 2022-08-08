@@ -1,4 +1,4 @@
-REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_1.8"
+REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.0"
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
 REZILION_AGENT_PATH=/tmp/rezilion/validat_ci_agent
 
