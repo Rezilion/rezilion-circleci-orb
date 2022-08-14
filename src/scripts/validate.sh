@@ -20,11 +20,17 @@ for dir in "$REZILION_OUTPUTS_FOLDER"/*/
     fi
 
     NORMALIZED_IMAGE_NAME=$(basename -- "$IMAGE_NAME_DECODED")
-    echo $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-name trivy || true
-    $REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-name trivy || true
+    VALIDATE_COMMAND="$REZILION_AGENT_PATH --log-path $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR"/validate_"$NORMALIZED_IMAGE_NAME".log --license-key "$REZILION_LICENSE_KEY" validate --ci-environment circleci --tests-directory $REZILION_OUTPUTS_FOLDER/"$ENCODED_DIR" --html-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".html --json-report-path $ARTIFACT_PATH/report_"$NORMALIZED_IMAGE_NAME".json --container-image-name "$IMAGE_NAME_DECODED" --scanner-name trivy"
+    echo $VALIDATE_COMMAND
+
+    if [[ -n "$REZILION_DONT_SAVE_TEST_LOGS" ]]; then
+      $VALIDATE_COMMAND &> /dev/null
+    else
+      $VALIDATE_COMMAND
+    fi
 
   done
 
-if [[ -z "${REZILION_DONT_SAVE_TEST_LOGS}" ]]; then
+if [[ ! -n "$REZILION_DONT_SAVE_TEST_LOGS" ]]; then
   tar cfz $ARTIFACT_PATH/logs.tar.gz $REZILION_OUTPUTS_FOLDER
 fi
