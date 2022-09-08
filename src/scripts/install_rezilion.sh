@@ -1,26 +1,26 @@
 REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.0.1"
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
-REZILION_AGENT_PATH=/tmp/rezilion/validat_ci_agent
+REZILION_AGENT_PATH=/tmp/rezilion/validate_ci_agent
 
 mkdir -p $REZILION_OUTPUTS_FOLDER
 
-if command -v curl > /dev/null; then
-  curl -s $REZILION_EXECUTABLE_URL --output $REZILION_AGENT_PATH
-fi || true
-
-if ! command -v curl > /dev/null; then
-  if command -v apt-get ; then
+# curl isn't installed
+if ! command -v curl &> /dev/null; then
+  # install curl with apt-get
+  if command -v apt-get &> /dev/null; then
     apt-get update
     apt-get install curl -y
-    curl -s $REZILION_EXECUTABLE_URL --output $REZILION_AGENT_PATH
-    apt-get remove curl -y
 
-  elif command -v yum > /dev/null; then
+  # install curl with yum
+  elif command -v yum &> /dev/null; then
     yum install curl -y
-    curl -s $REZILION_EXECUTABLE_URL --output $REZILION_AGENT_PATH
-    yum remove curl -y
-  fi
 
-fi || true
+  else
+    echo "Impossible to install Rezilion without curl"
+    exit 1
+  fi
+fi
+
+curl -s $REZILION_EXECUTABLE_URL --output $REZILION_AGENT_PATH
 
 chmod +x $REZILION_AGENT_PATH || true
