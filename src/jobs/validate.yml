@@ -5,7 +5,7 @@ docker:
 parameters:
   image_to_scan:
     type: string
-    default: "no_image"
+    default: "0"
     description: The image name to scan. Depending on your usecase, this parameter is optional. If only one image is used in a pipeline, leave it blank. Enter the requested image name if using multiple images in a pipeline. See our user guide for more information.
 steps:
   - attach_workspace:
