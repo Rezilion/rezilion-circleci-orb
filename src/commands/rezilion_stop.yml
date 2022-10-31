@@ -1,7 +1,0 @@
----
-description: Stops rezilion over the container
-steps:
-  - persist_to_workspace:
-      root: /tmp/rezilion/
-      paths:
-        - outputs/*

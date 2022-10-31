@@ -1,6 +1,11 @@
-REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.2.1"
+REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.2.2"
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
 REZILION_AGENT_PATH=/tmp/rezilion/validate_ci_agent
+
+if [ -f $REZILION_AGENT_PATH ]; then
+  echo "Rezilion is already installed, skipping installation..."
+  exit 0
+fi
 
 mkdir -p $REZILION_OUTPUTS_FOLDER
 

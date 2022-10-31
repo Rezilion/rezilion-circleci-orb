@@ -14,7 +14,7 @@ for dir in "$REZILION_OUTPUTS_FOLDER"/*/
     ENCODED_DIR=$(basename -- "${dir%*/}")
 
     if [[ $REZILION_IMAGE_TO_SCAN == "0" ]] ; then
-      IMAGE_NAME_DECODED=$(echo "$ENCODED_DIR" | base64 --decode) || true
+      IMAGE_NAME_DECODED=$(echo -n "$ENCODED_DIR" | base64 --decode) || true
     else
       IMAGE_NAME_DECODED=$REZILION_IMAGE_TO_SCAN
     fi
@@ -24,13 +24,13 @@ for dir in "$REZILION_OUTPUTS_FOLDER"/*/
     echo "$VALIDATE_COMMAND"
 
     if [[ -n "$REZILION_DONT_SAVE_TEST_LOGS" ]]; then
-      $VALIDATE_COMMAND &> /dev/null
+      $VALIDATE_COMMAND &> /dev/null || true
     else
-      $VALIDATE_COMMAND
+      $VALIDATE_COMMAND || true
     fi
 
   done
 
 if [[ -z "$REZILION_DONT_SAVE_TEST_LOGS" ]]; then
-  tar cfz $ARTIFACT_PATH/logs.tar.gz $REZILION_OUTPUTS_FOLDER
+  tar cfz $ARTIFACT_PATH/logs.tar.gz $REZILION_OUTPUTS_FOLDER || true
 fi

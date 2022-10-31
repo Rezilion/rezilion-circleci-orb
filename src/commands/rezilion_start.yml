@@ -5,14 +5,20 @@ parameters:
     type: string
     default: "0"
     description: The image name to scan. Depending on your usecase, this parameter is optional. If only one image is used in a pipeline, leave it blank. Enter the requested image name if using multiple images in a pipeline. See our user guide for more information.
+  command:
+    type: string
+    description: The command to validate
 steps:
-  - attach_workspace:
-      at: /tmp/rezilion
   - run:
       name: Install Rezilion
       command: << include(scripts/install_rezilion.sh) >>
   - run:
-      name: Starts Rezilion over the container choosen for the test
+      name: Starts Rezilion over the container chosen for the test
       environment:
         REZILION_IMAGE_TO_SCAN: <<parameters.image_to_scan>>
+        REZILION_USER_COMMAND: <<parameters.command>>
       command: << include(scripts/rezilion_start.sh) >>
+  - persist_to_workspace:
+      root: /tmp/rezilion/
+      paths:
+        - outputs/*
