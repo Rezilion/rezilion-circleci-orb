@@ -26,7 +26,6 @@ workflows:
       - rezilion/validate:
           filters: *filters
           image_to_scan: nginx:1.21.1
-          option: 'validate'
           requires:
             - test_nginx
       - orb-tools/pack:

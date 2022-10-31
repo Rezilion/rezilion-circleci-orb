@@ -30,7 +30,6 @@ workflows:
       - test_nginx
       - test_mongo
       - rezilion/validate:
-          option: 'validate'
           requires:
             - test_nginx
             - test_mongo
