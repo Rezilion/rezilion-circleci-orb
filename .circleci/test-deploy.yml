@@ -14,14 +14,9 @@ jobs:
     docker:
       - image: nginx:1.21.1
     steps:
-      - rezilion/rezilion_start
-
-      - run:
-          name: test nginx
+      - rezilion/rezilion_start:
           command: |
             timeout 5 /docker-entrypoint.sh nginx || true
-
-      - rezilion/rezilion_stop
 
 workflows:
   test-deploy:
@@ -31,6 +26,7 @@ workflows:
       - rezilion/validate:
           filters: *filters
           image_to_scan: nginx:1.21.1
+          option: 'validate'
           requires:
             - test_nginx
       - orb-tools/pack:

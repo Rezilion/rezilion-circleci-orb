@@ -12,28 +12,25 @@ usage:
       steps:
         - rezilion/rezilion_start:
             image_to_scan: nginx:1.21.1
-        - run:
-            name: test nginx
             command: |
               timeout 6 /docker-entrypoint.sh nginx || true
-        - rezilion/rezilion_stop
+
     test_mongo:
       docker:
         - image: mongo:5.0.5
       steps:
         - rezilion/rezilion_start:
             image_to_scan: mongo:5.0.5
-        - run:
-            name: test mongo
             command: |
               timeout 10 docker-entrypoint.sh mongod || true
-        - rezilion/rezilion_stop
+
 workflows:
   my_workflow:
     jobs:
       - test_nginx
       - test_mongo
       - rezilion/validate:
+          option: 'validate'
           requires:
             - test_nginx
             - test_mongo

@@ -10,17 +10,16 @@ usage:
       docker:
         - image: nginx:1.21.1
       steps:
-        - rezilion/rezilion_start
-        - run:
-            name: test nginx
+        - rezilion/rezilion_start:
             command: |
               timeout 5 /docker-entrypoint.sh nginx || true
-        - rezilion/rezilion_stop
+
   workflows:
     my_workflow:
       jobs:
         - test_nginx
         - rezilion/validate:
             image_to_scan: nginx:1.21.1
+            option: 'validate'
             requires:
               - test_nginx
