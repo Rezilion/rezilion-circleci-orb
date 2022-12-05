@@ -23,6 +23,6 @@ for dir in "$REZILION_OUTPUTS_FOLDER"/*/
     fi
 
     NORMALIZED_IMAGE_NAME=$(basename -- "$IMAGE_NAME_DECODED")
-    $REZILION_AGENT_PATH --license-key "$REZILION_LICENSE_KEY" --ci-environment circleci gates --severity-gate $REZILION_SEVERITY_GATE --json-report-path $ARTIFACT_PATH/report_$NORMALIZED_IMAGE_NAME.json
+    $REZILION_AGENT_PATH --license-key "$REZILION_LICENSE_KEY" --ci-environment circleci gates --severity-gate "$REZILION_SEVERITY_GATE" --json-report-path $ARTIFACT_PATH/report_$NORMALIZED_IMAGE_NAME.json
 
   done
