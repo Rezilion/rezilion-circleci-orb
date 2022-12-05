@@ -1,4 +1,4 @@
-if [[ ! -n "$REZILION_SEVERITY_GATE" ]]; then
+if [[ -z "$REZILION_SEVERITY_GATE" ]]; then
     echo "No gates found, skipping..."
     exit 0
 fi
