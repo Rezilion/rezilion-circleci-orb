@@ -10,13 +10,9 @@ steps:
       command: << include(scripts/install_rezilion.sh) >>
   - run:
       name: Rezilion Validate
-      environment:
-        REZILION_IMAGE_TO_SCAN: <<parameters.image_to_scan>>
       command: << include(scripts/validate.sh) >>
   - store_artifacts:
       path: /tmp/rezilion/artifacts/
   - run:
       name: Rezilion Gates
-      environment:
-        REZILION_IMAGE_TO_SCAN: <<parameters.image_to_scan>>
       command: << include(scripts/gates.sh) >>
