@@ -2,11 +2,6 @@
 description: Validate pipeline image(s) and providing results on your environment and security risks based on your vulnerabilities
 docker:
   - image: centos:centos7
-parameters:
-  image_to_scan:
-    type: string
-    default: "0"
-    description: The image name to scan. Depending on your usecase, this parameter is optional. If only one image is used in a pipeline, leave it blank. Enter the requested image name if using multiple images in a pipeline. See our user guide for more information.
 steps:
   - attach_workspace:
       at: /tmp/rezilion
