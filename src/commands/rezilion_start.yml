@@ -3,7 +3,7 @@ description: Starts rezilion over the container
 parameters:
   image_to_scan:
     type: string
-    description: The image name to scan. Depending on your use case. If only one image is used in a pipeline, leave it blank. Enter the requested image name if using multiple images in a pipeline. See our user guide for more information.
+    description: The image name to scan
   command:
     type: string
     description: The command to validate
