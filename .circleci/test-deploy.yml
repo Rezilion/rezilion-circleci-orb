@@ -1,7 +1,7 @@
 ---
 version: 2.1
 orbs:
-  orb-tools: circleci/orb-tools@11.1
+  orb-tools: circleci/orb-tools@11.5
   rezilion: rezilion/rezilion@dev:<<pipeline.git.revision>>
 
 
@@ -15,6 +15,7 @@ jobs:
       - image: nginx:1.21.1
     steps:
       - rezilion/rezilion_start:
+          image_to_scan: nginx:1.21.1
           command: |
             timeout 5 /docker-entrypoint.sh nginx || true
 
@@ -25,7 +26,6 @@ workflows:
           filters: *filters
       - rezilion/validate:
           filters: *filters
-          image_to_scan: nginx:1.21.1
           requires:
             - test_nginx
       - orb-tools/pack:
