@@ -1,7 +1,7 @@
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
 REZILION_AGENT_PATH=/tmp/rezilion/validate_ci_agent
 
-BASE64_IMAGE=$(echo -n "$REZILION_IMAGE_TO_SCAN" | base64)
+BASE64_IMAGE="$(echo -n "$REZILION_IMAGE_TO_SCAN" | base64)"
 REZILION_JOB_FOLDER=$REZILION_OUTPUTS_FOLDER/$BASE64_IMAGE/$CIRCLE_JOB
 
 if [[ $CIRCLE_NODE_TOTAL -gt 1 ]] ; then
@@ -22,9 +22,9 @@ $REZILION_AGENT_PATH --license-key "$REZILION_LICENSE_KEY" --ci-environment circ
 
 if [ -z "$REZILION_FAILED_RUNNING" ]; then
   cat /tmp/rezilion/shell_command_output
-  echo "Command Exit Code: $(</tmp/rezilion/shell_command_exit_code)"
+  echo Command Exit Code: "$(cat </tmp/rezilion/shell_command_exit_code)"
 
-  if [[ $(< /tmp/rezilion/shell_command_exit_code) != "0" ]]; then
+  if [[ "$(cat </tmp/rezilion/shell_command_exit_code)" != "0" ]]; then
     echo "Rezilion succeeded but command failed - failing job..."
     exit 1
   fi

@@ -1,6 +1,10 @@
-REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.4.2"
+REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.5.0"
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
 REZILION_AGENT_PATH=/tmp/rezilion/validate_ci_agent
+
+if command -v apk > /dev/null 2>&1 ; then
+  REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_alpine_agent_v2.5.0"
+fi
 
 if [ -f $REZILION_AGENT_PATH ]; then
   echo "Rezilion is already installed, skipping installation..."
@@ -19,6 +23,10 @@ if ! command -v curl > /dev/null 2>&1 ; then
   # install curl with yum
   elif command -v yum > /dev/null 2>&1 ; then
     yum install curl -y
+
+  # install curl with apk
+  elif command -v apk > /dev/null 2>&1 ; then
+    apk add curl
 
   else
     echo "Impossible to install Rezilion without curl"

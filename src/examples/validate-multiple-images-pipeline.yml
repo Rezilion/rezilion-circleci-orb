@@ -24,12 +24,12 @@ usage:
             command: |
               timeout 10 docker-entrypoint.sh mongod || true
 
-workflows:
-  my_workflow:
-    jobs:
-      - test_nginx
-      - test_mongo
-      - rezilion/validate:
-          requires:
-            - test_nginx
-            - test_mongo
+  workflows:
+    my_workflow:
+      jobs:
+        - test_nginx
+        - test_mongo
+        - rezilion/validate:
+            requires:
+              - test_nginx
+              - test_mongo
