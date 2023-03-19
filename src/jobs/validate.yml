@@ -3,6 +3,7 @@ description: Validate pipeline image(s) and providing results on your environmen
 docker:
   - image: rezilion/validate-ci:b63c85d0
 steps:
+  - checkout
   - attach_workspace:
       at: /tmp/rezilion
   - run:
