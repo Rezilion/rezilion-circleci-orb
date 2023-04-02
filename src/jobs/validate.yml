@@ -1,7 +1,7 @@
 ---
 description: Validate pipeline image(s) and providing results on your environment and security risks based on your vulnerabilities
 docker:
-  - image: rezilion/validate-ci:b63c85d0
+  - image: rezilion/validate-ci:6978c669
 steps:
   - checkout
   - attach_workspace:

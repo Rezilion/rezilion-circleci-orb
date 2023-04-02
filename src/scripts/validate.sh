@@ -14,6 +14,7 @@ if [[ -z "$REZILION_DONT_SAVE_TEST_LOGS" ]]; then
 fi
 
 export REZILION_BACKEND_API_GATEWAY_URL="https://api.rezilion.com"
+export REZILION_BACKEND_API_EUROPE_GATEWAY_URL="https://api.eu.rezilion.com"
 
 for dir in "$REZILION_MINERS_OUTPUT_FOLDER"/*/
   do

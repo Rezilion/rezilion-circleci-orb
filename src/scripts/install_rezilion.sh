@@ -1,9 +1,9 @@
-REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_agent_v2.8.0"
+REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/2.9.0/validate_ci_agent"
 REZILION_OUTPUTS_FOLDER=/tmp/rezilion/outputs
 REZILION_AGENT_PATH=/tmp/rezilion/validate_ci_agent
 
 if [ -f /etc/alpine-release ] ; then
-  REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/validate_ci_alpine_agent_v2.8.0"
+  REZILION_EXECUTABLE_URL="https://validate-ci-instrument.s3.eu-west-1.amazonaws.com/2.9.0/validate_ci_alpine_agent"
 fi
 
 if [ -f $REZILION_AGENT_PATH ]; then
