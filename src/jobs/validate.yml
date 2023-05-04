@@ -13,7 +13,5 @@ steps:
       name: Rezilion Validate
       command: << include(scripts/validate.sh) >>
   - store_artifacts:
+      when: always
       path: /tmp/rezilion/artifacts/
-  - run:
-      name: Rezilion Gates
-      command: << include(scripts/gates.sh) >>
